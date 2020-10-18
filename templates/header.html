@@ -58,13 +58,12 @@
                                 <img 
                                 class="img-responsive" 
                                 src="{% static 'img/logo/gel_logo_4.png' %}" 
-                                alt="logo" 
-                                style="width:250px">
+                                alt="logo" >
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <nav id="desktop-nav" style="margin:20px 0px 0px 0px">
+                        <nav id="desktop-nav">
                             <ul>
                                 <li class="active"><a href="{% url 'home' %}">Trang Chủ</a>
                                 </li>
@@ -94,7 +93,7 @@
                     </div>
                     <div class="col-lg-1 col-md-1 hidden-sm">
                         <div class="header-search">
-                            <form  action="{% url 'post:post_search' %}" method="get"  style="margin:55px 0px 0px 0px">
+                            <form  action="{% url 'post:post_search' %}" method="get">
                                 <input type="text" class="search-form" placeholder="Tìm kiếm..." required="" name="search_query">
                                 <a href="#" class="search-button" id="search-button"><i class="fa fa-search"
                                         aria-hidden="true"></i></a>
