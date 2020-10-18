@@ -1,0 +1,154 @@
+{% load static %}
+
+<!-- Footer Area Start Here -->
+<footer>
+    <div class="footer-area-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="footer-box">
+                        <a href="index.html">
+                            <img 
+                            class="img-responsive" 
+                            src="{% static 'img/logo/gel_logo_3.png' %}" 
+                            alt="logo"
+                            style="width:250px">
+                        </a>
+                        <div class="footer-about">
+                            <p>Praesent vel rutrum purus. Nam vel dui eu sus duis dignissim dignissim. Suspenetey disse
+                                at ros tecongueconsequat.Fusce sit amet rna feugiat.</p>
+                        </div>
+                        <ul class="footer-social">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="footer-box">
+                        <h3>Liên Kết</h3>
+                        <ul class="featured-links">
+                            <li>
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Trang Chủ</a></li>
+                                    <li><a href="{% url 'post:post' %}">Bài Viết</a></li>
+                                    <li><a href="{% url 'gallery:picture_gallery' %}">Thư Viện Ảnh</a></li>
+                                    <li><a href="{% url 'gallery:video_gallery' %}">Thư Viện Video</a></li>
+                                    <li><a href="{% url 'about' %}">Giới Thiệu</a></li>
+                                    <li><a href="{% url 'contact' %}">Liên Hệ</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="footer-box">
+                        <h3>Thông Tin</h3>
+                        <ul class="corporate-address">
+                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">(+84) 982 205 216</a></li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">(+84) 937 691 089</a></li>
+                            <li><i class="fa fa-map" aria-hidden="true"></i><a href="#">
+                                Lầu M, 117-119 Lý Chính Thắng,<br> P.7 Q.3, TP Hồ Chí Minh
+                            </a></li>
+                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i>info.greenedulink@gmail.com</li>
+                        </ul>
+
+                        <div id="mc_embed_signup">
+                            <form 
+                            action="https://gmail.us3.list-manage.com/subscribe/post?u=15777aa60fa1b0270a930e5ab&amp;id=f63ed0b189" 
+                            method="post" 
+                            id="mc-embedded-subscribe-form" 
+                            name="mc-embedded-subscribe-form" 
+                            class="validate" 
+                            target="_blank" 
+                            novalidate>
+                                <div class="newsletter-area">
+                                    <h3>Đăng Ký</h3>
+                                    <div class="input-group stylish-input-group">
+                                        <input 
+                                        type="email" 
+                                        value="" 
+                                        name="EMAIL" 
+                                        class="required email form-control" 
+                                        id="mce-EMAIL" 
+                                        placeholder="Nhập email của bạn">
+                                        <span class="input-group-addon">
+                                            <button type="submit"
+                                            value="Subscribe" 
+                                            name="subscribe" 
+                                            id="mc-embedded-subscribe">
+                                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="mce-responses" class="clear">
+                                        <div class="response" id="mce-error-response" style="display:none"></div>
+                                        <div class="response" id="mce-success-response" style="display:none"></div>
+                                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_15777aa60fa1b0270a930e5ab_f63ed0b189" tabindex="-1" value=""></div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="footer-box">
+                        <h3>Ảnh Flickr</h3>
+                        <ul class="flickr-photos">
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/1.jpg' %}" alt="flickr"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/2.jpg' %}" alt="flickr"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/3.jpg' %}" alt="flickr"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/4.jpg' %}" alt="flickr"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/5.jpg' %}" alt="flickr"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img class="img-responsive" src="{% static 'img/footer/6.jpg' %}" alt="flickr"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-area-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <p>&copy; 2017 Academics All Rights Reserved. &nbsp; Designed by<a target="_blank"
+                            href="https://www.radiustheme.com" rel="nofollow"> RadiusTheme</a></p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <ul class="payment-method">
+                        <li>
+                            <a href="#"><img alt="payment-method" src="{% static 'img/payment-method1.jpg' %}"></a>
+                        </li>
+                        <li>
+                            <a href="#"><img alt="payment-method" src="{% static 'img/payment-method2.jpg' %}"></a>
+                        </li>
+                        <li>
+                            <a href="#"><img alt="payment-method" src="{% static 'img/payment-method3.jpg' %}"></a>
+                        </li>
+                        <li>
+                            <a href="#"><img alt="payment-method" src="{% static 'img/payment-method4.jpg' %}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Area End Here -->

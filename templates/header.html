@@ -1,0 +1,146 @@
+{% load static %}
+
+<!-- Header Area Start Here -->
+<header>
+    <div id="header2" class="header2-area">
+        <div class="header-top-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="header-top-left">
+                            <ul>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">(+84) 982 205 216 - (+84) 937 691 089</a></li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#">info.greenedulink@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="header-top-right">
+                            <ul>
+                                <li>
+                                    <a class="login-btn-area" href="#" id="login-button"><i class="fa fa-lock"
+                                            aria-hidden="true"></i> Đăng Nhập</a>
+                                    <div class="login-form" id="login-form" style="display: none;">
+                                        <div class="title-default-left-bold">Login</div>
+                                        <form>
+                                            <label>Username or email address *</label>
+                                            <input type="text" placeholder="Name or E-mail" />
+                                            <label>Password *</label>
+                                            <input type="password" placeholder="Password" />
+                                            <label class="check">Lost your password?</label>
+                                            <span><input type="checkbox" name="remember" />Remember Me</span>
+                                            <button class="default-big-btn" type="submit" value="Login">Login</button>
+                                            <button class="default-big-btn form-cancel" type="submit"
+                                                value="">Cancel</button>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="apply-btn-area">
+                                        <a href="https://gmail.us3.list-manage.com/subscribe/post?u=15777aa60fa1b0270a930e5ab&amp;id=f63ed0b189" class="apply-now-btn" target="_blank">
+                                            Đăng Ký Ngay
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-menu-area bg-textPrimary" id="sticker">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-3">
+                        <div class="logo-area">
+                            <a href="{% url 'home' %}">
+                                <img 
+                                class="img-responsive" 
+                                src="{% static 'img/logo/gel_logo_4.png' %}" 
+                                alt="logo" 
+                                style="width:250px">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <nav id="desktop-nav" style="margin:20px 0px 0px 0px">
+                            <ul>
+                                <li class="active"><a href="{% url 'home' %}">Trang Chủ</a>
+                                </li>
+                                <li><a href="{% url 'post:post' %}">Bài Viết</a>
+                                    <ul>
+                                    
+                                        {% for category in category_qs %}
+                                        
+                                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+
+                                        {% endfor %}
+
+                                    </ul>
+                                </li>
+                                <li><a href="#">Thư Viện</a>
+                                    <ul>
+                                        <li><a href="{% url 'gallery:picture_gallery' %}">Thư Viện Ảnh</a></li>
+                                        <li><a href="{% url 'gallery:video_gallery' %}">Thư Viện Video</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'about' %}">Giới Thiệu</a>
+                                </li>
+                                <li><a href="{% url 'contact' %}">Liên Hệ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-1 col-md-1 hidden-sm">
+                        <div class="header-search">
+                            <form  action="{% url 'post:post_search' %}" method="get"  style="margin:55px 0px 0px 0px">
+                                <input type="text" class="search-form" placeholder="Tìm kiếm..." required="" name="search_query">
+                                <a href="#" class="search-button" id="search-button"><i class="fa fa-search"
+                                        aria-hidden="true"></i></a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu Area Start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul>
+                                <li><a href="{% url 'home' %}">Trang Chủ</a>
+                                </li>
+                                <li><a href="{% url 'post:post' %}">Bài Viết</a>
+                                    <ul>
+                                        {% for category in category_qs %}
+                                        
+                                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li><a href="#">Thư Viện</a>
+                                    <ul>
+                                        <li><a href="{% url 'gallery:picture_gallery' %}">Thư Viện Ảnh</a></li>
+                                        <li><a href="{% url 'gallery:video_gallery' %}">Thư Viện Video</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'contact' %}">Giới Thiệu</a>
+                                </li>
+                                <li><a href="{% url 'about' %}">Liên Hệ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu Area End -->
+</header>
+<!-- Header Area End Here -->

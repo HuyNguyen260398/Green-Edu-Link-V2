@@ -1,0 +1,210 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Inner Page Banner Area Start Here -->
+<div class="inner-page-banner-area" style="background-image: url('{% static 'img/banner/5.jpg' %}');">
+    <div class="container">
+        <div class="pagination-area">
+            <h1>Bài Viết</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Trang Chủ</a> -</li>
+                <li>Bài Viết</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Inner Page Banner Area End Here -->
+<!-- News Page Area Start Here -->
+<div class="news-page-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+
+                {% if search_query or category_obj or tag_obj %}
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                        {% if post_qs %}
+                        <h2 style="margin-bottom:70px">Các bài viết
+                            {% if search_query %}
+                            liên quan đến "{{ search_query }}"
+                            {% elif category_obj %}
+                            trong danh mục "{{ category_obj.name }}"
+                            {% else %}
+                            có từ khóa "{{ tag_obj.name }}"
+                            {% endif %}
+                        </h2>
+                        {% else %}
+                        <h2 style="margin-bottom:70px">Rất tiếc, chúng tôi không tìm thấy bài viết nào
+                            {% if search_query %}
+                            liên quan đến "{{ search_query }}"
+                            {% elif category_obj %}
+                            trong danh mục "{{ category_obj.name }}"
+                            {% else %}
+                            có từ khóa "{{ tag_obj.name }}"
+                            {% endif %}
+                        </h2>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% endif %}
+
+                <div class="row">
+
+                    {% for post in page_obj %}
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="news-box">
+                            <div class="news-img-holder">
+                                <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="research">
+                                <ul class="news-date1">
+                                    <li>{{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }}</li>
+                                    <li>{{ post.created_at | date:"Y" }}</li>
+                                </ul>
+                            </div>
+                            <h2 class="title-default-left-bold"><a
+                                    href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </h2>
+                            <ul class="title-bar-high news-comments">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>Tác Giả</span> {{ post.user_id.username }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <span>{{ post.views }}</span> Lượt Xem
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                        <span>{{ post.comments }}</span> Bình Luận
+                                    </a>
+                                </li>
+                            </ul>
+                            <p>{{ post.description | truncatechars:200 }}</p>
+                            <a href="{{ post.get_absolute_url }}" class="default-big-btn">Xem Thêm</a>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <ul class="pagination-center">
+
+                            {% if post_qs %}
+
+                                {% for page in page_obj.paginator.page_range %}
+
+                                <li {% if page_obj.number == page %}class="active"{% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+
+                                {% endfor %}
+
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <div class="sidebar">
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Tìm Kiếm</h3>
+                            <div class="sidebar-find-course">
+                                <form id="checkout-form" action="{% url 'post:post_search' %}" method="get">
+                                    <div class="form-group course-name">
+                                        <input id="first-name" placeholder="Từ khóa..." class="form-control"
+                                            type="text" name="search_query" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="sidebar-search-btn-full disabled" type="submit"
+                                            value="">Tìm Kiếm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Danh Mục</h3>
+                            <ul class="sidebar-categories">
+
+                                {% for category in category_qs %}
+
+                                <li>
+                                    <a href="{{ category.get_absolute_url }}"
+                                        {% if category_obj and category_obj.id == category.id %}
+                                        style="color:yellow; font-weight: bold" {% endif %}>{{ category.name }}</a>
+                                </li>
+
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Bài Viết Mới Nhất</h3>
+                            <div class="sidebar-latest-research-area">
+                                <ul>
+
+                                    {% for post in post_qs|slice:"4" %}
+
+                                    <li>
+                                        <div class="latest-research-img">
+                                            <a href="{{ post.get_absolute_url }}">
+                                                <img src="{{ post.thumbnail.url }}"
+                                                    class="img-responsive" 
+                                                    alt="skilled"
+                                                    style="width:100px">
+                                            </a>
+                                        </div>
+                                        <div class="latest-research-content">
+                                            <h4>{{ post.created_at | date:"d" }}.
+                                                {{ post.created_at | date:"m" }}.
+                                                {{ post.created_at | date:"Y" }}</h4>
+                                            <a href="{{ post.get_absolute_url }}">
+                                                <p>{{ post.title }}</p>
+                                            </a>
+                                        </div>
+                                    </li>
+
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Từ Khóa Nổi Bật</h3>
+                            <ul class="product-tags">
+
+                                {% for tag in tag_qs %}
+
+
+                                <li {% if tag_obj and tag_obj.id == tag.id %} style="background: #002147" {% endif %}>
+                                    <a href="{{ tag.get_absolute_url }}" {% if tag_obj and tag_obj.id == tag.id %}
+                                        style="color:#FFFFFF" {% endif %}>{{ tag.name }}</a>
+                                </li>
+
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- News Page Area End Here -->
+
+{% endblock content %}

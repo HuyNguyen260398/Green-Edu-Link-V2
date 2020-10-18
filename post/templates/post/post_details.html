@@ -1,0 +1,224 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Inner Page Banner Area Start Here -->
+<div class="inner-page-banner-area" style="background-image: url('{% static 'img/banner/5.jpg' %}');">
+    <div class="container">
+        <div class="pagination-area">
+            {% comment %} <h1>Bài Viết Số {{ post_obj.id }}</h1> {% endcomment %}
+            <ul>
+                <li><a href="{% url 'home' %}">Trang Chủ</a> -</li>
+                <li>Bài Viết - </li>
+                <li>Bài Viết Số {{ post_obj.id }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Inner Page Banner Area End Here -->
+<!-- News Details Page Area Start Here -->
+<div class="news-details-page-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                <div class="row news-details-page-inner">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="news-img-holder">
+                            <img src="{{ post_obj.thumbnail.url }}" class="img-responsive" alt="research" style="width:800px; height:400px">
+                            <ul class="news-date1">
+                                <li>{{ post_obj.created_at | date:"d" }} / {{ post_obj.created_at | date:"m" }}</li>
+                                <li>{{ post_obj.created_at | date:"Y" }}</li>
+                            </ul>
+                        </div>
+                        <h2 class="title-default-left-bold-lowhight">{{ post_obj.title }}</h2>
+                        <ul class="title-bar-high news-comments">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>Tác Giả</span> {{ post_obj.user_id.username }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    <span>{{ post_obj.views }}</span> Lượt Xem
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                    <span>{{ post_obj.comments }}</span> Bình Luận
+                                </a>
+                            </li>
+                        </ul>
+                        <div>{{ post_obj.content | safe }}</div>
+                        <ul class="news-social">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        </ul>
+                        <div class="course-details-comments">
+                            <h3 class="sidebar-title">({{ post_obj.comments }}) Bình Luận</h3>
+
+                            {% for comment in comment_qs %}
+
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img alt="Comments" src="{% static 'img/students/student11.png' %}" class="media-object" style="width:64px">
+                                </a>
+                                <div class="media-body">
+                                    <h3><a href="#">{{ comment.name }}</a></h3>
+                                    <h4>{{ comment.email }}</h4>
+                                    <p>{{ comment.body  | linebreaks }}</p>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                        <div class="leave-comments">
+                            <h3 class="sidebar-title">Hãy để lại bình luận của bạn</h3>
+                            <div class="row">
+                                <div class="contact-form">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    {{ comment_form.name }}
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    {{ comment_form.email }}
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    {{ comment_form.body }}
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group margin-bottom-none">
+                                                    <button type="submit" class="view-all-accent-btn">Đăng bình luận</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <div class="sidebar">
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Tìm Kiếm</h3>
+                            <div class="sidebar-find-course">
+                                <form id="checkout-form" action="{% url 'post:post_search' %}" method="get">
+                                    <div class="form-group course-name">
+                                        <input id="first-name" placeholder="Từ khóa..." class="form-control"
+                                            type="text" name="search_query" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="sidebar-search-btn-full disabled" type="submit"
+                                            value="Login">Tìm Kiếm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Danh Mục</h3>
+                            <ul class="sidebar-categories">
+
+                                {% for category in category_qs %}
+
+                                        <li>
+                                            <a href="{{ category.get_absolute_url }}" 
+                                                {% if category_obj and category_obj.id == category.id %}
+                                                    style="color:yellow; font-weight: bold"
+                                                {% endif %}
+                                            >{{ category.name }}</a>
+                                        </li>
+
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Bài Viết Mới Nhất</h3>
+                            <div class="sidebar-latest-research-area">
+                                <ul>
+
+                                    {% for post in post_qs|slice:"4" %}
+
+                                    <li>
+                                        <div class="latest-research-img">
+                                            <a href="{{ post.get_absolute_url }}">
+                                                <img 
+                                                src="{{ post.thumbnail.url }}" 
+                                                class="img-responsive"
+                                                alt="skilled"
+                                                style="width:100px">
+                                            </a>
+                                        </div>
+                                        <div class="latest-research-content">
+                                            <h4>{{ post.created_at | date:"d" }}.
+                                            {{ post.created_at | date:"m" }}.
+                                            {{ post.created_at | date:"Y" }}</h4>
+                                            <a href="{{ post.get_absolute_url }}"><p>{{ post.title }}</p></a>
+                                        </div>
+                                    </li>
+
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-box-inner">
+                            <h3 class="sidebar-title">Từ Khóa Nổi Bật</h3>
+                            <ul class="product-tags">
+
+                                {% for tag in tag_qs %}
+                                
+                                
+                                <li 
+                                    {% if tag_obj and tag_obj.id == tag.id %}
+                                        style="background: #002147"
+                                    {% endif %}
+                                >
+                                    <a href="{{ tag.get_absolute_url }}"
+                                        {% if tag_obj and tag_obj.id == tag.id %}
+                                            style="color:#FFFFFF"
+                                        {% endif %}
+                                    >{{ tag.name }}</a>
+                                </li>
+                                
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- News Page Area End Here -->
+
+{% endblock content %}

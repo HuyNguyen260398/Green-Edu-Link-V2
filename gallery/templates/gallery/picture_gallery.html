@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Inner Page Banner Area Start Here -->
+<div class="inner-page-banner-area" style="background-image: url('{% static 'img/banner/5.jpg' %}');">
+    <div class="container">
+        <div class="pagination-area">
+            <h1>Thư Viện Ảnh</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Trang Chủ</a> -</li>
+                <li>Thư Viện Ảnh</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Inner Page Banner Area End Here -->
+<!-- Gallery Area 1 Start Here -->
+<div class="gallery-area1">
+    <div class="container">
+        <div class="row gallery-wrapper">
+
+            {% for picture in page_obj %}
+
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="gallery-box">
+                    <img src="{{ picture.image.url }}" class="img-responsive" alt="gallery">
+                    <div class="gallery-content">
+                        <a href="{{ picture.image.url }}" class="zoom"><i class="fa fa-link" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="pagination-center">
+
+                    {% for page in page_obj.paginator.page_range %}
+                    <li {% if page_obj.number == page %}class="active"{% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Gallery Area 1 End Here -->
+
+{% endblock content %}

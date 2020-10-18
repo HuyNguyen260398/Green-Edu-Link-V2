@@ -1,0 +1,125 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Inner Page Banner Area Start Here -->
+<div class="inner-page-banner-area" style="background-image: url('{% static 'img/banner/5.jpg' %}');">
+    <div class="container">
+        <div class="pagination-area">
+            <h1>Liên Hệ</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Trang Chủ</a> -</li>
+                <li>Liên Hệ</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Inner Page Banner Area End Here -->
+<!-- Contact Us Page 2 Area Start Here -->
+<div class="contact-us-page2-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <h2 class="title-default-left title-bar-high">Thông Tin Liên Lạc</h2>
+                <div class="contact-us-info2">
+                    <ul>
+                        <li>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            Lầu M, 117-119 Lý Chính Thắng,<br> P.7 Q.3, TP Hồ Chí Minh
+                        </li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>(+84) 982 205 216 - (+84) 937 691 089</li>
+                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i>info.greenedulink@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h2 class="title-default-left title-bar-high">Liên Hệ Với Chúng Tôi</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="contact-form2">
+                        <form id="contact-form" action="{% url 'send_email' %}" method="post">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Tên*" class="form-control" name="name"
+                                            id="form-name" data-error="Tên không được trống" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="email" placeholder="Email*" class="form-control" name="email"
+                                            id="form-email" data-error="Email không được trống" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea placeholder="Nội dung*" class="textarea form-control" name="message"
+                                            id="form-message" rows="8" cols="20" data-error="Nội dung không được trống"
+                                            required></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
+                                    <div class="form-group margin-bottom-none">
+                                        <button type="submit" class="default-big-btn">Gửi Email</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 col-sm-12">
+                                    <div class='form-response'></div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px">
+                    
+                    {% if success_msg %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-success" role="alert">
+
+                                {{ success_msg }}
+
+                            </div>
+                        </div>
+
+                        {% elif error_msg %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger" role="alert">
+
+                                {{ error_msg }}
+
+                            </div>
+                        </div>
+                        {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="google-map-area">
+                <div id="googleMap" style="width:100%; height:395px;">
+                    <iframe style="width:100%; height:100%;" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1647.8669018681649!2d106.6847548276217!3d10.787545404848634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2c5552702f%3A0xf0adaedb0d2fc89a!2sGalasoft%20Co.%2C%20Ltd!5e0!3m2!1sen!2s!4v1586305376641!5m2!1sen!2s" 
+                    frameborder="0" 
+                    allowfullscreen="" 
+                    aria-hidden="false" 
+                    tabindex="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Us Page 2 Area End Here -->
+
+{% endblock content %}

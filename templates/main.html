@@ -1,0 +1,41 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Green Edu Link | Trang Chủ</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    {% include 'css.html' %}
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Add your site or application content here -->
+    <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <!-- Main Body Area Start Here -->
+    <div id="wrapper">
+        
+        {% include 'header.html' %}
+
+        {% block content %}{% endblock %}
+
+        {% include 'footer.html' %}
+
+    </div>
+    <!-- Main Body Area End Here -->
+    
+    {% include 'js.html' %}
+
+</body>
+
+</html>
