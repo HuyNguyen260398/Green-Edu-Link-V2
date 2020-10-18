@@ -23,7 +23,6 @@ from .views import (
     about,
     contact,
     send_email,
-    founder_info,
 )
 
 urlpatterns = [
@@ -31,7 +30,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
-    path('founder_info/', founder_info, name='founder_info'),
     path('post/', include('post.urls')),
     path('gallery/', include('gallery.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),

@@ -1,5 +1,12 @@
 {% load static %}
 
+{% url 'home' as home_url %}
+{% url 'post:post' as post_url %}
+{% url 'gallery:picture_gallery' as picture_gallery_url %}
+{% url 'gallery:video_gallery' as video_gallery_url %}
+{% url 'about' as about_url %}
+{% url 'contact' as contact_url %}
+
 <!-- Header Area Start Here -->
 <header>
     <div id="header2" class="header2-area">
@@ -65,9 +72,9 @@
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <nav id="desktop-nav">
                             <ul>
-                                <li class="active"><a href="{% url 'home' %}">Trang Chủ</a>
+                                <li {% if request.path == home_url %}class="active"{% endif %}><a href="{% url 'home' %}">Trang Chủ</a>
                                 </li>
-                                <li><a href="{% url 'post:post' %}">Bài Viết</a>
+                                <li {% if request.path == post_url %}class="active"{% endif %}><a href="{% url 'post:post' %}">Bài Viết</a>
                                     <ul>
                                     
                                         {% for category in category_qs %}
@@ -78,15 +85,15 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="#">Thư Viện</a>
+                                <li {% if request.path == picture_gallery_url or request.path == video_gallery_url %}class="active"{% endif %}><a href="#">Thư Viện</a>
                                     <ul>
                                         <li><a href="{% url 'gallery:picture_gallery' %}">Thư Viện Ảnh</a></li>
                                         <li><a href="{% url 'gallery:video_gallery' %}">Thư Viện Video</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{% url 'about' %}">Giới Thiệu</a>
+                                <li {% if request.path == about_url %}class="active"{% endif %}><a href="{% url 'about' %}">Giới Thiệu</a>
                                 </li>
-                                <li><a href="{% url 'contact' %}">Liên Hệ</a>
+                                <li {% if request.path == contact_url %}class="active"{% endif %}><a href="{% url 'contact' %}">Liên Hệ</a>
                                 </li>
                             </ul>
                         </nav>

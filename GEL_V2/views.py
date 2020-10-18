@@ -59,14 +59,3 @@ def send_email(request):
             context['error_msg'] = 'Vui lòng điền đầy đủ thông tin!'
 
     return render(request, 'contact.html', context)
-
-
-def founder_info(request):
-    post_list = Post.objects.all().order_by('-created_at')[:3]
-    tag_list = Tag.objects.all()
-
-    context = {
-        'post_list': post_list,
-        'tag_list': tag_list,
-    }
-    return render(request, 'founder.html', context)
