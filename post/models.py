@@ -11,6 +11,8 @@ User = settings.AUTH_USER_MODEL
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    is_parent_menu = models.BooleanField(default=True)
+    child_menus = models.ManyToManyField('self', null=True, blank=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     def __str__(self):

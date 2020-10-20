@@ -78,8 +78,29 @@
                                     <ul>
                                     
                                         {% for category in category_qs %}
-                                        
-                                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+
+                                            {% if category.is_parent_menu %}
+                                            
+                                            <li {% if category.child_menus.all %}class="has-child-menu"{% endif %}>
+                                                <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+
+                                                {% if category.child_menus.all %}
+
+                                                    <ul class="thired-level">
+
+                                                    {% for child in category.child_menus.all %}
+                                                    
+                                                        <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                                                    
+                                                    {% endfor %}
+
+                                                    </ul>
+
+                                                {% endif %}
+
+                                            </li>
+                                            
+                                            {% endif %}
 
                                         {% endfor %}
 
