@@ -88,7 +88,7 @@
 
                                                     <ul class="thired-level">
 
-                                                    {% for child in category.child_menus.all %}
+                                                    {% for child in category.child_menus.all reversed %}
                                                     
                                                         <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
                                                     
