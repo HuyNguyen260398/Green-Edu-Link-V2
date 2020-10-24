@@ -21,6 +21,7 @@ class PostAdmin(admin.ModelAdmin):
     fields = (
         'user_id',
         'category',
+        'sub_category',
         'title',
         'description',
         'slug',

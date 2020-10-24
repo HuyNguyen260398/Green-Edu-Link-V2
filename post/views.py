@@ -7,7 +7,7 @@ from .forms import CommentForm
 
 def post(request):
     post_qs = Post.objects.all().order_by('-created_at')
-    # post_qs_filtered = post_qs
+    post_qs_filtered = post_qs
     category_qs = Category.objects.all().order_by('name')
     tag_qs = Tag.objects.all().order_by('name')
 
@@ -17,7 +17,7 @@ def post(request):
 
     context = {
         'post_qs': post_qs,
-        # 'post_qs_filtered': post_qs_filtered,
+        'post_qs_filtered': post_qs_filtered,
         'category_qs': category_qs,
         'tag_qs': tag_qs,
         'page_obj': page_obj
@@ -61,7 +61,7 @@ def post_detail(request, id, slug):
 
 
 def post_search(request):
-    post_qs = Post.objects.all()
+    post_qs = Post.objects.all().order_by('-created_at')
     category_qs = Category.objects.all().order_by('name')
     tag_qs = Tag.objects.all().order_by('name')
     list_post_id = []
@@ -77,18 +77,18 @@ def post_search(request):
                     post = post_qs.filter(id=post_tag.post_id.id).get()
                     list_post_id.append(post.id)
 
-            post_qs = post_qs.filter(Q(title__icontains=search_query) |
-                                     Q(description__icontains=search_query) |
-                                     Q(category__name__icontains=search_query) |
-                                     Q(id__in=list_post_id)
-                                     ).distinct().order_by('-created_at')
-    paginator = Paginator(post_qs, 4)
+            post_qs_filtered = post_qs.filter(Q(title__icontains=search_query) |
+                                              Q(description__icontains=search_query) |
+                                              Q(category__name__icontains=search_query) |
+                                              Q(id__in=list_post_id)
+                                              ).distinct().order_by('-created_at')
+    paginator = Paginator(post_qs_filtered, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
         'post_qs': post_qs,
-        # 'post_qs_filtered': post_qs_filtered,
+        'post_qs_filtered': post_qs_filtered,
         'category_qs': category_qs,
         'tag_qs': tag_qs,
         'page_obj': page_obj,
@@ -98,25 +98,35 @@ def post_search(request):
     return render(request, "post/post.html", context)
 
 
-def post_category_search(request, slug):
-    post_qs = Post.objects.all()
+def post_category_search(request, parent='', child=''):
+    post_qs = Post.objects.all().order_by('-created_at')
     category_qs = Category.objects.all().order_by('name')
     tag_qs = Tag.objects.all().order_by('name')
 
-    category_obj = category_qs.get(slug=slug)
+    category_obj = None
+    sub_category_obj = None
 
-    post_qs = post_qs.filter(
-        category__slug__icontains=slug).order_by('-created_at')
+    if child:
+        category_obj = category_qs.get(slug=parent)
+        sub_category_obj = category_qs.get(slug=child)
+        post_qs_filtered = post_qs.filter(
+            category__slug__icontains=parent,
+            sub_category__slug__icontains=child).order_by('-created_at')
+    else:
+        category_obj = category_qs.get(slug=parent)
+        post_qs_filtered = post_qs.filter(
+            category__slug__icontains=parent).order_by('-created_at')
 
-    paginator = Paginator(post_qs, 4)
+    paginator = Paginator(post_qs_filtered, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
         'post_qs': post_qs,
-        # 'post_qs_filtered': post_qs_filtered,
+        'post_qs_filtered': post_qs_filtered,
         'category_qs': category_qs,
         'category_obj': category_obj,
+        'sub_category_obj': sub_category_obj,
         'tag_qs': tag_qs,
         'page_obj': page_obj,
     }
@@ -140,16 +150,16 @@ def post_tag_search(request, slug):
             post = post_qs.filter(id=post_tag.post_id.id).get()
             list_post_id.append(post.id)
 
-    post_qs = post_qs.filter(
+    post_qs_filtered = post_qs.filter(
         Q(id__in=list_post_id)).distinct().order_by('-created_at')
 
-    paginator = Paginator(post_qs, 4)
+    paginator = Paginator(post_qs_filtered, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
         'post_qs': post_qs,
-        # 'post_qs_filtered': post_qs_filtered,
+        'post_qs_filtered': post_qs_filtered,
         'category_qs': category_qs,
         'tag_qs': tag_qs,
         'tag_obj': tag_obj,

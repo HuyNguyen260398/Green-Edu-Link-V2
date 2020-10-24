@@ -27,26 +27,26 @@
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
-                        {% if post_qs %}
-                        <h2 style="margin-bottom:70px">Các bài viết
-                            {% if search_query %}
-                            liên quan đến "{{ search_query }}"
-                            {% elif category_obj %}
-                            trong danh mục "{{ category_obj.name }}"
-                            {% else %}
-                            có từ khóa "{{ tag_obj.name }}"
-                            {% endif %}
-                        </h2>
+                        {% if post_qs_filtered %}
+                            <h2 style="margin-bottom:70px">Các bài viết
+                                {% if search_query %}
+                                    liên quan đến "{{ search_query }}"
+                                {% elif category_obj %}
+                                    trong danh mục "{{ category_obj.name }}{% if sub_category_obj %}/{{ sub_category_obj.name }}{% endif %}"
+                                {% else %}
+                                    có từ khóa "{{ tag_obj.name }}"
+                                {% endif %}
+                            </h2>
                         {% else %}
-                        <h2 style="margin-bottom:70px">Rất tiếc, chúng tôi không tìm thấy bài viết nào
-                            {% if search_query %}
-                            liên quan đến "{{ search_query }}"
-                            {% elif category_obj %}
-                            trong danh mục "{{ category_obj.name }}"
-                            {% else %}
-                            có từ khóa "{{ tag_obj.name }}"
-                            {% endif %}
-                        </h2>
+                            <h2 style="margin-bottom:70px">Rất tiếc, chúng tôi không tìm thấy bài viết nào
+                                {% if search_query %}
+                                    liên quan đến "{{ search_query }}"
+                                {% elif category_obj %}
+                                    trong danh mục "{{ category_obj.name }}{% if sub_category_obj %}/{{ sub_category_obj.name }}{% endif %}"
+                                {% else %}
+                                    có từ khóa "{{ tag_obj.name }}"
+                                {% endif %}
+                            </h2>
                         {% endif %}
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="pagination-center">
 
-                            {% if post_qs %}
+                            {% if post_qs_filtered %}
 
                                 {% for page in page_obj.paginator.page_range %}
 
@@ -139,11 +139,15 @@
 
                                 {% for category in category_qs %}
 
-                                <li>
-                                    <a href="{{ category.get_absolute_url }}"
-                                        {% if category_obj and category_obj.id == category.id %}
-                                        style="color:yellow; font-weight: bold" {% endif %}>{{ category.name }}</a>
-                                </li>
+                                    {% if category.is_parent_menu %}
+
+                                        <li>
+                                            <a href="{% url 'post:post_category_search' parent=category.slug %}"
+                                                {% if category_obj and category_obj.id == category.id %}
+                                                style="color:yellow; font-weight: bold" {% endif %}>{{ category.name }}</a>
+                                        </li>
+
+                                    {% endif %}
 
                                 {% endfor %}
 
@@ -190,11 +194,10 @@
 
                                 {% for tag in tag_qs %}
 
-
-                                <li {% if tag_obj and tag_obj.id == tag.id %} style="background: #002147" {% endif %}>
-                                    <a href="{{ tag.get_absolute_url }}" {% if tag_obj and tag_obj.id == tag.id %}
-                                        style="color:#FFFFFF" {% endif %}>{{ tag.name }}</a>
-                                </li>
+                                    <li {% if tag_obj and tag_obj.id == tag.id %} style="background: #002147" {% endif %}>
+                                        <a href="{{ tag.get_absolute_url }}" {% if tag_obj and tag_obj.id == tag.id %}
+                                            style="color:#FFFFFF" {% endif %}>{{ tag.name }}</a>
+                                    </li>
 
                                 {% endfor %}
                             </ul>

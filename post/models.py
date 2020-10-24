@@ -12,14 +12,11 @@ User = settings.AUTH_USER_MODEL
 class Category(models.Model):
     name = models.CharField(max_length=50)
     is_parent_menu = models.BooleanField(default=True)
-    child_menus = models.ManyToManyField('self', null=True, blank=True)
+    child_menus = models.ManyToManyField('self', blank=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse('post:post_category_search', kwargs={'slug': self.slug})
 
 
 @receiver(pre_save, sender=Category)
@@ -51,7 +48,9 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(
-        Category, null=True, blank=True, on_delete=models.SET_NULL)
+        Category, related_name='category', null=True, blank=True, on_delete=models.SET_NULL)
+    sub_category = models.ForeignKey(
+        Category, related_name='sub_category', null=True, blank=True, on_delete=models.SET_NULL)
     slug = models.SlugField(unique=True, blank=True, null=True)
     thumbnail = models.ImageField(
         upload_to='post_thumbnails', height_field=None, width_field=None, max_length=None)
