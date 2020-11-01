@@ -11,8 +11,8 @@ class PictureAdmin(admin.ModelAdmin):
     def image_load(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
             url=obj.image.url,
-            width=obj.image.width,
-            height=obj.image.height,
+            width=0.5 * obj.image.width,
+            height=0.5 * obj.image.height,
         ))
 
 

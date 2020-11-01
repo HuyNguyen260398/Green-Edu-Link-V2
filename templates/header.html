@@ -144,11 +144,34 @@
                                 </li>
                                 <li><a href="{% url 'post:post' %}">Bài Viết</a>
                                     <ul>
+                                    
                                         {% for category in category_qs %}
-                                        
-                                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+
+                                            {% if category.is_parent_menu %}
+                                            
+                                                <li {% if category.child_menus.all %}class="has-child-menu"{% endif %}>
+                                                    <a href="{% url 'post:post_category_search' parent=category.slug %}">{{ category.name }}</a>
+
+                                                    {% if category.child_menus.all %}
+
+                                                        <ul class="thired-level">
+
+                                                        {% for child in category.child_menus.all reversed %}
+                                                        
+                                                            <li><a href="{% url 'post:post_category_search' parent=category.slug child=child.slug %}">{{ child.name }}</a></li>
+                                                        
+                                                        {% endfor %}
+
+                                                        </ul>
+
+                                                    {% endif %}
+
+                                                </li>
+                                            
+                                            {% endif %}
 
                                         {% endfor %}
+
                                     </ul>
                                 </li>
                                 <li><a href="#">Thư Viện</a>

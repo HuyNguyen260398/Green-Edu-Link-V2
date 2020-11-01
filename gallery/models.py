@@ -17,7 +17,7 @@ class Picture(models.Model):
     user_id = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL)
     image = models.ImageField(
-        upload_to="gallery", height_field=None, width_field=None, max_length=None)
+        upload_to="gallery", height_field=None, width_field=None, max_length=500)
     title = models.CharField(max_length=255, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -31,11 +31,19 @@ def post_post_save_receiver(sender, instance, created, *arg, **kwargs):
     if created:
         soup = BSHTML(instance.content, "html.parser")
         images = soup.findAll('img')
+
         for image in images:
-            if 'http' not in image['src']:
-                picture = Picture(post_id=instance,
-                                  image=image['src'].replace('/media/', ''))
-                picture.save()
+
+            img_path = image['src']
+
+            if 'https://green-edu-link-v2.s3.amazonaws.com' in img_path:
+                img_path = img_path.replace(
+                    'https://green-edu-link-v2.s3.amazonaws.com/media/', '')
+            else:
+                img_path = img_path.replace('/media/', '')
+
+            picture = Picture(post_id=instance, image=img_path)
+            picture.save()
 
 
 @receiver(pre_save, sender=Picture)
