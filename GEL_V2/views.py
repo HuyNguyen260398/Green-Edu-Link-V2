@@ -6,22 +6,31 @@ from post.models import *
 
 
 def home(request):
-    post_qs = Post.objects.all().order_by('-created_at')[:3]
+    post_qs = Post.objects.all().order_by('-created_at')
+    post_qs_1 = post_qs[:3]
+    post_qs_2 = post_qs[3:6]
     category_qs = Category.objects.all().order_by('name')
     context = {
-        'post_qs': post_qs,
+        'post_qs_1': post_qs_1,
+        'post_qs_2': post_qs_2,
         'category_qs': category_qs,
     }
     return render(request, "home.html", context)
 
 
 def about(request):
-    context = {}
+    category_qs = Category.objects.all().order_by('name')
+    context = {
+        'category_qs': category_qs,
+    }
     return render(request, "about.html", context)
 
 
 def contact(request):
-    context = {}
+    category_qs = Category.objects.all().order_by('name')
+    context = {
+        'category_qs': category_qs,
+    }
     return render(request, 'contact.html', context)
 
 

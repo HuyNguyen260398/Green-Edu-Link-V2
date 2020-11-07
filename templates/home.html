@@ -19,9 +19,9 @@
                     <p>Emply dummy text of the printing and typesetting industry orem Ipsum has been the industry's
                         standard
                         <br>dummy text ever sinceprinting and typesetting industry. </p>
-                    <div class="slider-btn-area">
+                    {% comment %} <div class="slider-btn-area">
                         <a href="#" class="default-big-btn">Start a Course</a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                     <p>Emply dummy text of the printing and typesetting industry orem Ipsum has been the industry's
                         standard
                         <br>dummy text ever sinceprinting and typesetting industry. </p>
-                    <div class="slider-btn-area">
+                    {% comment %} <div class="slider-btn-area">
                         <a href="#" class="default-big-btn">Start a Course</a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -45,9 +45,9 @@
                     <p>Emply dummy text of the printing and typesetting industry orem Ipsum has been the industry's
                         standard
                         <br>dummy text ever sinceprinting and typesetting industry. </p>
-                    <div class="slider-btn-area">
+                    {% comment %} <div class="slider-btn-area">
                         <a href="#" class="default-big-btn">Start a Course</a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
 </div>
 <!-- About 1 Area End Here -->
 <!-- Courses 1 Area Start Here -->
-<div class="courses1-area">
+{% comment %} <div class="courses1-area">
     <div class="container">
         <h2 class="title-default-left">Ngành Học Nổi Bật</h2>
     </div>
@@ -258,7 +258,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 <!-- Courses 1 Area End Here -->
 <!-- Video Area Start Here -->
 <div class="video-area overlay-video bg-common-style" style="background-image: url('{% static 'img/banner/1.jpg' %}');">
@@ -395,39 +395,83 @@
 <div class="news-event-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 news-inner-area">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 news-inner-area">
                 <h2 class="title-default-left">Tin Tức Mới Nhất</h2>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 news-inner-area">
+                {% comment %} <h2 class="title-default-left">Tin Tức Mới Nhất</h2> {% endcomment %}
                 <ul class="news-wrapper">
 
-                    {% for post in post_qs %}
+                    {% for post in post_qs_1 %}
                     
-                    <li>
-                        <div class="news-img-holder">
-                            <a href="{{ post.get_absolute_url }}">
-                                <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news" height='101' width='150'>
-                            </a>
-                        </div>
-                        <div class="news-content-holder" style="margin-left: 20px">
-                            <h3>
+                        <li>
+                            <div class="news-img-holder">
                                 <a href="{{ post.get_absolute_url }}">
-                                    {{ post.title }}
+                                    <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
                                 </a>
-                            </h3>
-                            <div class="post-date">
-                                {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} / {{ post.created_at | date:"Y" }}
                             </div>
-                            <p>{{ post.description | truncatechars:50 }}</p>
-                        </div>
-                    </li>
+                            <div class="news-content-holder" style="margin-left: 20px">
+                                <h3>
+                                    <a href="{{ post.get_absolute_url }}">
+                                        {{ post.title }}
+                                    </a>
+                                </h3>
+                                <div class="post-date">
+                                    {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} / {{ post.created_at | date:"Y" }}
+                                </div>
+                                <p>{{ post.description | truncatechars:100 }}</p>
+                            </div>
+                        </li>
                     
                     {% endfor %}
 
                 </ul>
+                {% comment %} <div class="news-btn-holder">
+                    <a href="{% url 'post:post' %}" class="view-all-accent-btn">Xem Tất Cả</a>
+                </div> {% endcomment %}
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 news-inner-area">
+                {% comment %} <h2 class="title-default-left">Tin Tức Mới Nhất</h2> {% endcomment %}
+                <ul class="news-wrapper">
+
+                    {% for post in post_qs_2 %}
+                    
+                        <li>
+                            <div class="news-img-holder">
+                                <a href="{{ post.get_absolute_url }}">
+                                    <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
+                                </a>
+                            </div>
+                            <div class="news-content-holder" style="margin-left: 20px">
+                                <h3>
+                                    <a href="{{ post.get_absolute_url }}">
+                                        {{ post.title }}
+                                    </a>
+                                </h3>
+                                <div class="post-date">
+                                    {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} / {{ post.created_at | date:"Y" }}
+                                </div>
+                                <p>{{ post.description | truncatechars:100 }}</p>
+                            </div>
+                        </li>
+                    
+                    {% endfor %}
+
+                </ul>
+                {% comment %} <div class="news-btn-holder">
+                    <a href="{% url 'post:post' %}" class="view-all-accent-btn">Xem Tất Cả</a>
+                </div> {% endcomment %}
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 news-inner-area">
                 <div class="news-btn-holder">
                     <a href="{% url 'post:post' %}" class="view-all-accent-btn">Xem Tất Cả</a>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 event-inner-area">
+
+            {% comment %} <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 event-inner-area">
                 <h2 class="title-default-left">Các Sự Kiện Sắp Tới</h2>
                 <ul class="event-wrapper">
                     <li class="wow bounceInUp" data-wow-duration="2s" data-wow-delay=".1s">
@@ -472,7 +516,7 @@
                 <div class="event-btn-holder">
                     <a href="#" class="view-all-primary-btn">View All</a>
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </div>

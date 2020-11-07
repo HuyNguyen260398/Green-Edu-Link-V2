@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 
 from .models import *
+from post.models import *
 
 
 def gallery(request):
@@ -10,8 +11,10 @@ def gallery(request):
 
 def picture_gallery(request):
     picture_qs = Picture.objects.all().order_by('-timestamp')
-    context = {}
-
+    category_qs = Category.objects.all().order_by('name')
+    context = {
+        'category_qs': category_qs,
+    }
     if picture_qs.exists():
         paginator = Paginator(picture_qs, 9)
         page_number = request.GET.get('page')
@@ -23,7 +26,10 @@ def picture_gallery(request):
 
 def video_gallery(request):
     video_qs = Video.objects.all().order_by('-timestamp')
-    context = {}
+    category_qs = Category.objects.all().order_by('name')
+    context = {
+        'category_qs': category_qs,
+    }
     if video_qs.exists():
         paginator = Paginator(video_qs, 4)
         page_number = request.GET.get('page')
