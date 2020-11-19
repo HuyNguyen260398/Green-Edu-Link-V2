@@ -33,17 +33,15 @@ def post_post_save_receiver(sender, instance, created, *arg, **kwargs):
         images = soup.findAll('img')
 
         for image in images:
-
             img_path = image['src']
 
             if 'https://green-edu-link-v2.s3.amazonaws.com' in img_path:
                 img_path = img_path.replace(
                     'https://green-edu-link-v2.s3.amazonaws.com/media/', '')
-            else:
-                img_path = img_path.replace('/media/', '')
-
-            picture = Picture(post_id=instance, image=img_path)
-            picture.save()
+                picture = Picture(post_id=instance, image=img_path)
+                picture.save()
+            # else:
+            #     img_path = img_path.replace('/media/', '')
 
 
 @receiver(pre_save, sender=Picture)
