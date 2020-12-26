@@ -61,8 +61,11 @@
             <div class="row service1-wrapper">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 service-box1">
                     <div class="service-box-content">
-                        <h3><a href="#">Học Bổng Hấp Dẫn</a></h3>
-                        <p>Eimply dummy text printing ypese tting industry.</p>
+                        <h3><a href="#">Uy Tín</a></h3>
+                        <p>
+                            Sau nhiều năm hoạt động và phát triển, Green Education Link đã xây dựng được lòng tin và chỗ
+                            đứng vững chắc của khách hàng.
+                        </p>
                     </div>
                     <div class="service-box-icon">
                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>
@@ -70,8 +73,11 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 service-box1">
                     <div class="service-box-content">
-                        <h3><a href="#">Nhân Viên Tận Tâm</a></h3>
-                        <p>Eimply dummy text printing ypese tting industry.</p>
+                        <h3><a href="#">Tận Tâm</a></h3>
+                        <p>
+                            Green Education Link đã và đang không ngừng nỗ lực xây dựng và phát triển nhằm mang lại chất
+                            lượng dịch vụ tốt nhất.
+                        </p>
                     </div>
                     <div class="service-box-icon">
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -79,8 +85,11 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 service-box1">
                     <div class="service-box-content">
-                        <h3><a href="#">Trường Học Danh Giá</a></h3>
-                        <p>Eimply dummy text printing ypese tting industry.</p>
+                        <h3><a href="#">Chuyên Nghiệp</a></h3>
+                        <p>
+                            Chúng tôi luôn cam kết mang lại sự hài lòng cho quý khách hàng đã tin tưởng chọn Green
+                            Education Link.
+                        </p>
                     </div>
                     <div class="service-box-icon">
                         <i class="fa fa-book" aria-hidden="true"></i>
@@ -94,7 +103,8 @@
 <!-- About 1 Area Start Here -->
 <div class="about1-area">
     <div class="container">
-        <h1 class="about-title wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">Chào mừng bạn đến với Green Edu Link</h1>
+        <h1 class="about-title wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">Chào mừng bạn đến với Green Edu
+            Link</h1>
         <p class="about-sub-title wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">Tmply dummy text of the
             printing and typesetting industry. Lorem Ipsum has been theindustry's standard dummy text ever since the
             1500s, when an unknown printer took.</p>
@@ -404,26 +414,27 @@
                 <ul class="news-wrapper">
 
                     {% for post in post_qs_1 %}
-                    
-                        <li>
-                            <div class="news-img-holder">
+
+                    <li>
+                        <div class="news-img-holder">
+                            <a href="{{ post.get_absolute_url }}">
+                                <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
+                            </a>
+                        </div>
+                        <div class="news-content-holder" style="margin-left: 20px">
+                            <h3>
                                 <a href="{{ post.get_absolute_url }}">
-                                    <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
+                                    {{ post.title }}
                                 </a>
+                            </h3>
+                            <div class="post-date">
+                                {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} /
+                                {{ post.created_at | date:"Y" }}
                             </div>
-                            <div class="news-content-holder" style="margin-left: 20px">
-                                <h3>
-                                    <a href="{{ post.get_absolute_url }}">
-                                        {{ post.title }}
-                                    </a>
-                                </h3>
-                                <div class="post-date">
-                                    {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} / {{ post.created_at | date:"Y" }}
-                                </div>
-                                <p>{{ post.description | truncatechars:100 }}</p>
-                            </div>
-                        </li>
-                    
+                            <p>{{ post.description | truncatechars:100 }}</p>
+                        </div>
+                    </li>
+
                     {% endfor %}
 
                 </ul>
@@ -437,26 +448,27 @@
                 <ul class="news-wrapper">
 
                     {% for post in post_qs_2 %}
-                    
-                        <li>
-                            <div class="news-img-holder">
+
+                    <li>
+                        <div class="news-img-holder">
+                            <a href="{{ post.get_absolute_url }}">
+                                <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
+                            </a>
+                        </div>
+                        <div class="news-content-holder" style="margin-left: 20px">
+                            <h3>
                                 <a href="{{ post.get_absolute_url }}">
-                                    <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="news">
+                                    {{ post.title }}
                                 </a>
+                            </h3>
+                            <div class="post-date">
+                                {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} /
+                                {{ post.created_at | date:"Y" }}
                             </div>
-                            <div class="news-content-holder" style="margin-left: 20px">
-                                <h3>
-                                    <a href="{{ post.get_absolute_url }}">
-                                        {{ post.title }}
-                                    </a>
-                                </h3>
-                                <div class="post-date">
-                                    {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m" }} / {{ post.created_at | date:"Y" }}
-                                </div>
-                                <p>{{ post.description | truncatechars:100 }}</p>
-                            </div>
-                        </li>
-                    
+                            <p>{{ post.description | truncatechars:100 }}</p>
+                        </div>
+                    </li>
+
                     {% endfor %}
 
                 </ul>
@@ -798,7 +810,8 @@
             <div class="students-join1-right">
                 <div>
                     <h2>Tham gia với hơn<span> 1000</span> học sinh.</h2>
-                    <a href="https://gmail.us3.list-manage.com/subscribe/post?u=15777aa60fa1b0270a930e5ab&amp;id=f63ed0b189" target="_blank" class="join-now-btn">Đăng Kí Ngay</a>
+                    <a href="https://gmail.us3.list-manage.com/subscribe/post?u=15777aa60fa1b0270a930e5ab&amp;id=f63ed0b189"
+                        target="_blank" class="join-now-btn">Đăng Kí Ngay</a>
                 </div>
             </div>
         </div>
