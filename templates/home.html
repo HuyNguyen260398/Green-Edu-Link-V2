@@ -681,10 +681,7 @@
               <h3>
                 <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
               </h3>
-              <div class="post-date">
-                {{ post.created_at | date:"d" }} / {{ post.created_at | date:"m"
-                }} / {{ post.created_at | date:"Y" }}
-              </div>
+              <div class="post-date">{{ post.created_at | date:"d/m/Y" }}</div>
               <p>{{ post.description | truncatechars:100 }}</p>
             </div>
           </li>
