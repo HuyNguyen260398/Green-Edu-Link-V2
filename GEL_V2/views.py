@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from django.contrib import messages
 from django.conf import settings
 from post.models import *
+from GEL_V2.utils import get_s3_filenames
 
 
 def home(request):
@@ -10,10 +10,13 @@ def home(request):
     post_qs_1 = post_qs[:3]
     post_qs_2 = post_qs[3:6]
     category_qs = Category.objects.all().order_by('name')
+    s3_files = get_s3_filenames
+
     context = {
         'post_qs_1': post_qs_1,
         'post_qs_2': post_qs_2,
         'category_qs': category_qs,
+        'files': s3_files
     }
     return render(request, "home.html", context)
 

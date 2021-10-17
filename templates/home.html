@@ -1264,30 +1264,13 @@
       data-r-large-nav="false"
       data-r-large-dots="false"
     >
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/1.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/2.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/3.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/4.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/1.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/2.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/3.jpg' %}" alt="brand" /></a>
-      </div>
-      <div class="brand-area-box">
-        <a href="#"><img src="{% static 'img/brand/4.jpg' %}" alt="brand" /></a>
-      </div>
+
+      {% for file in files|slice:'1:' %}
+        <div class="brand-area-box">
+          <a href="#"><img src="{% static file %}" alt="brand"></a>
+        </div>
+      {% endfor %}
+
     </div>
   </div>
 </div>

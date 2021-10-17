@@ -1,7 +1,7 @@
 from django.utils.text import slugify
 import random
 import string
-import threading
+import boto3
 
 
 def random_string_generator(
@@ -29,3 +29,15 @@ def unique_slug_generator(instance, is_post_instance, new_slug=None):
         )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
+
+def get_s3_filenames():
+    filenames = []
+    s3 = boto3.client("s3")
+    bucket = "green-edu-link-v2"
+    prefix = "static/img/schools"
+    result = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
+    for item in result['Contents']:
+        files = item['Key'].replace("static/", "")
+        # print(files)
+        filenames.append(files)
+    return filenames
