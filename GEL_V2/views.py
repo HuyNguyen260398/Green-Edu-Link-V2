@@ -10,13 +10,15 @@ def home(request):
     post_qs_1 = post_qs[:3]
     post_qs_2 = post_qs[3:6]
     category_qs = Category.objects.all().order_by('name')
-    s3_files = get_s3_filenames
+    school_logos = get_s3_filenames("green-edu-link-v2", "static/img/schools")
+    student_imgs = get_s3_filenames("green-edu-link-v2", "static/img/students/gel_students")
 
     context = {
         'post_qs_1': post_qs_1,
         'post_qs_2': post_qs_2,
         'category_qs': category_qs,
-        'files': s3_files
+        'school_logos': school_logos,
+        'student_imgs': student_imgs,
     }
     return render(request, "home.html", context)
 

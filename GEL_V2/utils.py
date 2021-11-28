@@ -30,12 +30,10 @@ def unique_slug_generator(instance, is_post_instance, new_slug=None):
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
 
-def get_s3_filenames():
+def get_s3_filenames(bucket_name, prefix_url):
     filenames = []
     s3 = boto3.client("s3")
-    bucket = "green-edu-link-v2"
-    prefix = "static/img/schools"
-    result = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
+    result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix_url)
     for item in result['Contents']:
         files = item['Key'].replace("static/", "")
         # print(files)

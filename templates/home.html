@@ -1055,166 +1055,23 @@
       <div class="students-join1-left">
         <div id="ri-grid" class="author-banner-bg ri-grid header text-center">
           <ul class="ri-grid-list">
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student1.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student2.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student3.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student4.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student5.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student6.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student7.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student8.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student1.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student2.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student3.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student4.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student5.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student6.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student7.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student8.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student1.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student2.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student3.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student4.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student5.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student6.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student7.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student8.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student1.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student2.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student3.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student4.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student5.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student6.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student7.jpg' %}" alt=""
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img src="{% static 'img/students/student8.jpg' %}" alt=""
-              /></a>
-            </li>
+
+            {% for file in student_imgs|slice:'1:' %}
+              <li>
+                <a href="#">
+                  <img src="{% static file %}" alt=""/>
+                </a>
+              </li>
+            {% endfor %}
+            
+            {% for file in student_imgs|slice:'1:' %}
+              <li>
+                <a href="#">
+                  <img src="{% static file %}" alt=""/>
+                </a>
+              </li>
+            {% endfor %}
+
           </ul>
         </div>
       </div>
@@ -1265,9 +1122,9 @@
       data-r-large-dots="false"
     >
 
-      {% for file in files|slice:'1:' %}
+      {% for file in school_logos|slice:'1:' %}
         <div class="brand-area-box">
-          <a href="#"><img src="{% static file %}" alt="brand"></a>
+          <a href="#"><img src="{% static file %}" alt="school_logo"></a>
         </div>
       {% endfor %}
 
