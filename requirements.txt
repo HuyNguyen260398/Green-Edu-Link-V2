@@ -13,7 +13,7 @@ gunicorn==20.0.4
 jmespath==0.10.0
 phonenumbers==8.12.11
 Pillow==8.0.0
-psycopg2==2.8.6
+psycopg2==3.0.11
 python-dateutil==2.8.1
 pytz==2020.1
 s3transfer==0.3.3
